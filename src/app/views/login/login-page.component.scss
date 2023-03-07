@@ -1,0 +1,11 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .form {
+      border: 1px solid gray;
+      background-color: aliceblue;
+      width: 500px;
+    }
+   
+}

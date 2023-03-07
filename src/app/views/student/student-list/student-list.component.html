@@ -1,0 +1,41 @@
+<p>List Student</p>
+<div class="login">
+  <form [formGroup]="filterForm" (ngSubmit)="search()" class="form p-5">
+    <div class="mb-3">
+      <label for="filter" class="form-label">Filter Options</label>
+      <select id="filter" formControlName="filter" class="w-100">
+        <option value="">Please Option</option>
+        <option value="1">Name</option>
+        <option value="2">PhoneNumber</option>
+        <option value="3">Id</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="keyWord" class="form-label">Key Word</label>
+      <input
+        type="text"
+        class="form-control"
+        id="keyWord"
+        placeholder="Input KeyWord"
+        formControlName="keyWord"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Search</button>
+  </form>
+</div>
+<kendo-grid
+  [data]="gridView"
+  [pageSize]="pageSize"
+  [skip]="skip"  
+  [pageable]="true"
+  (pageChange)="pageChange($event)"  
+>
+  <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
+  <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+  <kendo-grid-column field="phoneNumber" title="PhoneNumber"></kendo-grid-column>
+  <kendo-grid-column field="Action">
+    <ng-template kendoGridCellTemplate  let-dataItem>
+        <button kendoButton class="btn btn-link"><a  href="/student/detail/{{dataItem.id}}">Detail</a></button>
+    </ng-template>
+</kendo-grid-column> 
+</kendo-grid>
