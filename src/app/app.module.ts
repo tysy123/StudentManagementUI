@@ -18,19 +18,12 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '@env/environment';
 import { GridModule } from '@progress/kendo-angular-grid';
 
-
 const tokenGetter = () => {
-  const keepOnLogin = localStorage.getItem('keepOnLogin');
-  if (keepOnLogin === 'true') {
-    return localStorage.getItem('userToken');
-  }
-  return '';
+  return localStorage.getItem('userToken');
 };
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,6 +39,6 @@ const tokenGetter = () => {
     GridModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
