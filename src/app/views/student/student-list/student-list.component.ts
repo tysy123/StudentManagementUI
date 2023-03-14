@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '@apis/services/student.service';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, Observable, take  } from 'rxjs';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -21,6 +21,8 @@ export class StudentListComponent implements OnInit {
 
   items: any;
 
+  // x: number = 1;
+
   constructor(readonly studentService: StudentService, fb: FormBuilder) {
     this.filterForm = fb.group({
       filter: ['', Validators.required],
@@ -35,17 +37,58 @@ export class StudentListComponent implements OnInit {
     this.subscribesList.next(null);
     this.subscribesList.complete();
   }
+  test()
+  {
+    this.subscribesList.unsubscribe();
+  }
+  test_check()
+  {
+    const observable = new Observable(observer => {
+      let x = 5;
+      observer.next(x);
+      x += 10;
+      setTimeout(() => {
+      observer.next(x);
+      observer.complete();
+      }, 1000);
+    });
+    // .pipe(take(5));
+    
+    const observer = {
+      next: (value:any) => console.log(value),
+      complete: () => console.log('done')
+    };
+    
+    observable.subscribe(observer);
+
+    setTimeout(() => {
+      observable.subscribe(observer);
+    }, 1000);
+  }
   getStudent() {
     this.url = '/student/get-students';
     this.skip = 0;
+    // this.studentService
+    //   .GET_STUDENTS(this.url) 
+    //   .pipe(takeUntil(this.subscribesList))
+    //   .subscribe(({ data, code, message, status }) => {
+    //     if (data && message !== 'NotFound') {
+    //       this.items = data;
+    //       this.loadItems();
+    //     } else this.items = [];
+    //   });
     this.studentService
       .GET_STUDENTS(this.url)
       .pipe(takeUntil(this.subscribesList))
-      .subscribe(({ data, code, message, status }) => {
-        if (data && message !== 'NotFound') {
-          this.items = data;
-          this.loadItems();
-        } else this.items = [];
+      .subscribe({
+        next: ({data, code, message, status}) => {
+          if (data && message !== 'NotFound') {
+                  this.items = data;
+                  this.loadItems();
+                } else this.items = [];
+        },
+        error: (e) => console.error(e),
+        complete: () => console.log('done')
       });
   }
 

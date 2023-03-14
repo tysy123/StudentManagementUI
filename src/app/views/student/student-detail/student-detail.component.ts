@@ -15,6 +15,7 @@ export class StudentDetailComponent implements OnInit {
     name: '',
     phoneNumber: '',
   };
+  test : Date = new Date();
   studentId: string | null = '';
   subscribes = new Subject();
   constructor(
