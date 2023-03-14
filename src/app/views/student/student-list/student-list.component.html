@@ -39,3 +39,5 @@
     </ng-template>
 </kendo-grid-column> 
 </kendo-grid>
+<!-- {{items | json}} -->
+<div *ngFor="let student of items | filterListCondition:1" class="m-4">{{ student.name }}</div>

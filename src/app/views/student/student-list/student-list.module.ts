@@ -5,6 +5,7 @@ import { StudentListComponent } from './student-list.component';
 import { StudentListRoutingModule } from './student-list-routing.module';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterListConditionModule } from '@app/common/pipes/filter-list-condition/filter-list-condition.module';
 
 @NgModule({
   declarations: [StudentListComponent],
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GridModule,
     FormsModule,
     ReactiveFormsModule,
+    FilterListConditionModule
   ],
 })
 export class StudentListModule {}

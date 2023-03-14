@@ -1,9 +1,24 @@
 <div>Student Detail Page</div>
-<div class="m-3">    
-    <p>Detail Student <strong>{{student.name }}</strong></p>
-    <p><strong>Name:</strong> {{student.name}}</p>
-    <p><strong>PhoneNumber:</strong> {{student.phoneNumber}}</p>
-    <p>The hero's birthday is {{ test }} </p>
+{{student | json}}
+<div class="m-3">
+  <p>
+    Detail Student <strong>{{ student.name }}</strong>
+  </p>
+  <p><strong>Name:</strong> {{ student.name }}</p>
+  <p>
+    <strong>Gmail:</strong> {{ student.name | convertUserGmail : false : true }}
+  </p>
+  <p><strong>PhoneNumber:</strong> {{ student.phoneNumber }}</p>
+  <p>The hero's birthday is {{ test | date : "MM/dd/yy" }}</p>
 </div>
+
+<p>
+  Set userId to empty string after {{ time$ | async }} seconds, notice the text
+  "Edit" will be set to "Add"
+</p>
+<pre ngNonBindable>{{ nameTitle | appTitle }}</pre>
+<div>Form title: {{ nameTitle | appTitle }} User</div>
+<button #btn></button>
+<div id="input"></div>
 
 <a [routerLink]="['/student/list']" class="mt-3">Back to list</a>

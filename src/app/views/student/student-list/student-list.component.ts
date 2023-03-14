@@ -4,6 +4,7 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { Subject, takeUntil, Observable, take  } from 'rxjs';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { StudentResult } from '@apis/models/student.model';
 
 @Component({
   selector: 'app-student-list',
@@ -19,7 +20,7 @@ export class StudentListComponent implements OnInit {
 
   filterForm: FormGroup;
 
-  items: any;
+  items: StudentResult[] = [];
 
   // x: number = 1;
 
